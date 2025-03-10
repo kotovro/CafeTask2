@@ -15,6 +15,7 @@ Simulation::~Simulation()
 
 Result Simulation::simulateDay()
 {
+	m_cafe->clearResult();
 	for (double time = 0, endTime = m_workingHours * 60; time < endTime; time += m_timeInterval * 60)
 	{
 		m_cafe->serveClients(time);

@@ -11,10 +11,8 @@ public:
 
 	Dish();
 	Dish(std::vector<Ingredient*>* ingredients, double cookingTime);
-	~Dish()
-	{
-		
-	}
+	~Dish(){}
+	inline void setCookingTime(double cookingTime) { m_cookingTime = cookingTime; };
 	std::vector<Ingredient*>*  getIngeredients() { return m_ingredients; };
 	double getTotalPrice();
 	double getCookingTime() { return m_cookingTime; };

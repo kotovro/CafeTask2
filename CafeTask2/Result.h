@@ -8,7 +8,7 @@ struct Result
 	double income = 0;
 	double loss = 0;
 
-	inline void clearResult()
+	inline void clear()
 	{
 		servedClients = 0;
 		leavingClients = 0;

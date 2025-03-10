@@ -30,8 +30,8 @@ void Cafe::serveClients(double time)
 	{
 		//std::shared_ptr<Order> order = servedClient->getOrder();
 		m_result.income += (*servedClient)->getOrder()->getCost();
-		m_result.loss += (*servedClient)->getOrder()->getCookingTime() / 60 * m_cookSalary;
-		std::cout << "Cook got:" << (*servedClient)->getOrder()->getCookingTime() / 60 * m_cookSalary << std::endl;
+		m_result.loss += (*servedClient)->getOrder()->getCookingTime() * m_cookSalary;
+		//std::cout << "Cook got:" << (*servedClient)->getOrder()->getCookingTime() * m_cookSalary << std::endl;
 		delete (*servedClient);
 		m_result.servedClients++;
 		m_busyCooks--;
@@ -47,7 +47,7 @@ void Cafe::serveClients(double time)
 		if ((*clientToLeave)->getOrder()->getCookingStartTime() > 0)
 		{
 			m_result.loss += (*clientToLeave)->getOrder()->getCost();
-			m_result.loss += (time - (*clientToLeave)->getOrder()->getCookingStartTime()) / 60 * m_cookSalary;
+			m_result.loss += (time - (*clientToLeave)->getOrder()->getCookingStartTime()) * m_cookSalary;
 			delete (*clientToLeave);
 			m_busyCooks--;
 		}
@@ -56,15 +56,14 @@ void Cafe::serveClients(double time)
 	m_clients->erase(clientsToLeave, m_clients->end());
 }
 
-Result Cafe::getResult()
+void Cafe::clearResult() 
 {
-	Result resultForReturn;
-	resultForReturn.income = m_result.income;
-	resultForReturn.leavingClients = m_result.leavingClients;
-	resultForReturn.loss = m_result.loss;
-	resultForReturn.servedClients = m_result.servedClients;
-	m_result.clearResult();
-	return resultForReturn;
+	m_result.clear();
+}
+
+Result Cafe::getResult()
+{	
+	return m_result;
 }
 
 void Cafe::distributeOrders(double time)

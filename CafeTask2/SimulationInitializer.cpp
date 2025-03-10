@@ -25,6 +25,7 @@ std::map<std::string, Ingredient*>* SimuationInitializer::initializeIngredients(
 std::map<std::string, Dish*>* SimuationInitializer::initializeDishes(std::map<std::string, Dish*>*  dishes, std::map<std::string, Ingredient*>* ingredients)
 {   
     (*dishes)["Omelette"] = new Dish();
+    (*dishes)["Omelette"]->setCookingTime(0.15);
     std::vector<Ingredient*>* omeletteIngredients = (*dishes)["Omelette"]->getIngeredients();
     omeletteIngredients->push_back((*ingredients)["Egg"]);
     omeletteIngredients->push_back((*ingredients)["Egg"]);
@@ -34,6 +35,7 @@ std::map<std::string, Dish*>* SimuationInitializer::initializeDishes(std::map<st
 
 
     (*dishes)["Soup"] = new Dish();
+    (*dishes)["Omelette"]->setCookingTime(0.40);
     std::vector<Ingredient*>* soupIngredients;
     soupIngredients = (*dishes)["Soup"]->getIngeredients();
     soupIngredients->push_back((*ingredients)["Chicken"]);
@@ -43,6 +45,7 @@ std::map<std::string, Dish*>* SimuationInitializer::initializeDishes(std::map<st
 
     (*dishes)["LemonTea"] = new Dish();
     std::vector<Ingredient*>* teaIngredients;
+    (*dishes)["Omelette"]->setCookingTime(0.05);
     teaIngredients = (*dishes)["LemonTea"]->getIngeredients();
     teaIngredients->push_back((*ingredients)["Tea"]);
     teaIngredients->push_back((*ingredients)["Lemon"]);
@@ -50,12 +53,14 @@ std::map<std::string, Dish*>* SimuationInitializer::initializeDishes(std::map<st
 
     (*dishes)["CoolFishb"] = new Dish();
     std::vector<Ingredient*>* fishbIngredients;
+    (*dishes)["Omelette"]->setCookingTime(0.30);
     fishbIngredients = (*dishes)["CoolFishb"]->getIngeredients();
     fishbIngredients->push_back((*ingredients)["Fish"]);
     fishbIngredients->push_back((*ingredients)["Tomato"]);
     fishbIngredients->push_back((*ingredients)["Water"]);
 
     (*dishes)["CocktailSample"] = new Dish();
+    (*dishes)["Omelette"]->setCookingTime(0.25);
     std::vector<Ingredient*>* cocktailIngredients;
     cocktailIngredients = (*dishes)["CocktailSample"]->getIngeredients();
     cocktailIngredients->push_back((*ingredients)["Rum"]);
