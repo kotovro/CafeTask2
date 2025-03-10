@@ -8,8 +8,8 @@ int main()
 	int daysCount;
 	int cafeCapacity = 10;
 	double workingTime = 13;
-	int cooksCount = 3;
-	double timeInterval = 1;
+	int cooksCount = 5;
+	double timeInterval = 1.0 / 60;
 	double cookSalary = 10.2;
 	std::map<std::string, Ingredient*>* ingredients = new std::map<std::string, Ingredient*>();
 	std::map<std::string, Dish*>* dishes = new std::map<std::string, Dish*>();

@@ -14,8 +14,6 @@ Cafe::Cafe(int capacity, int cooksCount, double cooksSalary, Menu* menu)
 
 Cafe::~Cafe()
 {
-
-	std::cout << "Cafe is destroyed!";
 	delete m_orders;
 	delete m_clients;
 }
@@ -29,14 +27,14 @@ void Cafe::serveClients(double time)
 	for (auto servedClient = clientsToLeave; servedClient != m_clients->end(); ++servedClient)
 	{
 		//std::shared_ptr<Order> order = servedClient->getOrder();
-		m_result.income += (*servedClient)->getOrder()->getCost();
-		m_result.loss += (*servedClient)->getOrder()->getCookingTime() * m_cookSalary;
+		m_result.income += (*servedClient)->getOrder()->getCost() + (*servedClient)->getOrder()->getCookingTime() * m_cookSalary;
 		//std::cout << "Cook got:" << (*servedClient)->getOrder()->getCookingTime() * m_cookSalary << std::endl;
 		delete (*servedClient);
 		m_result.servedClients++;
 		m_busyCooks--;
 	}
 	m_clients->erase(clientsToLeave, m_clients->end());
+	
 
 	clientsToLeave = std::partition(m_clients->begin(), m_clients->end(), [time](Client* client) {
 		return time <= (client->getEntarnceTime() + client->getTolerance());
@@ -44,20 +42,26 @@ void Cafe::serveClients(double time)
 
 	for (auto clientToLeave = clientsToLeave; clientToLeave != m_clients->end(); ++clientToLeave)
 	{
-		if ((*clientToLeave)->getOrder()->getCookingStartTime() > 0)
+		if ((*clientToLeave)->getOrder()->getCookingStartTime() >= 0)
 		{
 			m_result.loss += (*clientToLeave)->getOrder()->getCost();
 			m_result.loss += (time - (*clientToLeave)->getOrder()->getCookingStartTime()) * m_cookSalary;
-			delete (*clientToLeave);
 			m_busyCooks--;
 		}
+		(*clientToLeave)->getOrder()->isClientLeft = true;
 		m_result.leavingClients++;
+		delete (*clientToLeave);
+		//std::cout << "Client left!" << std::endl;
 	}
 	m_clients->erase(clientsToLeave, m_clients->end());
 }
 
-void Cafe::clearResult() 
+void Cafe::restartCafe() 
 {
+	m_clients->clear();
+	while (!m_orders->empty())
+		m_orders->pop();
+	m_busyCooks = 0;
 	m_result.clear();
 }
 
@@ -75,6 +79,9 @@ void Cafe::distributeOrders(double time)
 
 	for (int cookIndex = 0, freeCooks = m_cooks - m_busyCooks; cookIndex != freeCooks; ++cookIndex)
 	{
+		while(m_orders->front()->isClientLeft)
+			m_orders->pop();
+
 		m_orders->front()->startCooking(time);
 		m_orders->pop();
 

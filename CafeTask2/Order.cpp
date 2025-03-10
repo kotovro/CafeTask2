@@ -32,6 +32,5 @@ double Order::getCookingStartTime()
 
 bool Order::isReady(double time)
 {
-	
-	return time >= m_cookingStartTime + getCookingTime();
+	return (m_cookingStartTime < 0 ) ? false : time >= m_cookingStartTime + getCookingTime();
 }

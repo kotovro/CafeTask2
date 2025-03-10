@@ -15,8 +15,8 @@ Simulation::~Simulation()
 
 Result Simulation::simulateDay()
 {
-	m_cafe->clearResult();
-	for (double time = 0, endTime = m_workingHours * 60; time < endTime; time += m_timeInterval * 60)
+	m_cafe->restartCafe();
+	for (double time = 0; time < m_workingHours; time += m_timeInterval)
 	{
 		m_cafe->serveClients(time);
 		int numberNewClients = rand() % 11;/// generate some unmber fom 0 to getFreeSpaces;

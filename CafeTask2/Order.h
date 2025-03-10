@@ -17,8 +17,10 @@ public:
 	bool isReady(double time);
 	double getCost();
 
+	bool isClientLeft = false;
+
 private:
-	double m_cookingStartTime = 0;
+	double m_cookingStartTime = -1;
 	std::vector<Dish*>* m_dishes = new std::vector<Dish*>();
 };
 

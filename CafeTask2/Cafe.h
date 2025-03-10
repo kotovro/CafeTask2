@@ -17,7 +17,7 @@ public:
 	void distributeOrders(double time);
 	void serveClients(double time);
 	void placeNewClient(Client* client);
-	void clearResult();
+	void restartCafe();
 	Result getResult();
 	inline Menu* const getMenu() { return m_menu; };
 	inline int getFreeSpaces() const { return m_capacity - m_clients->size(); };

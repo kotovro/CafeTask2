@@ -41,13 +41,13 @@ Client* ClientFactory::getNewClient(double time, Menu* const menu)
 
 	else
 	{
-		if ((int)time / 60 <= 5)
+		if ((int)time <= 5)
 		{
 			addDishToOrder(menu->getBreakfastMenu(), order);
 			addDishToOrder(menu->getDrinksMenu(), order);
 		}
 		
-		else if ((int)time / 60 <= 9)
+		else if ((int)time <= 9)
 		{
 			addDishToOrder(menu->getDinnerMenu(), order);
 		}
