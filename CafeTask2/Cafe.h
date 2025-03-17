@@ -19,8 +19,10 @@ public:
 	void placeNewClient(Client* client);
 	void restartCafe();
 	Result getResult();
+	inline int getBusyCooks() { return m_busyCooks; }
 	inline Menu* const getMenu() { return m_menu; };
 	inline int getFreeSpaces() const { return m_capacity - m_clients->size(); };
+	inline int getTotalAmountOfOrders() { return m_orders->size(); };
 
 private:
 	int m_capacity;

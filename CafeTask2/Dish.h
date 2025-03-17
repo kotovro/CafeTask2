@@ -19,5 +19,5 @@ public:
 
 private:
 	std::vector<Ingredient*>* m_ingredients = new std::vector<Ingredient*>();
-	double m_cookingTime;
+	double m_cookingTime = 0;
 };

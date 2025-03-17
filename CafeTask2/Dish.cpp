@@ -5,7 +5,7 @@ Dish::Dish()
 	m_cookingTime = 0;
 }
 
-Dish::Dish(std::vector<Ingredient*>* ingredients, double cookingTime)
+Dish::Dish(std::vector<Ingredient*>* ingredients, const double cookingTime)
 {
 	std::vector<Ingredient*>* temp = ingredients;
 	m_ingredients = temp;	
