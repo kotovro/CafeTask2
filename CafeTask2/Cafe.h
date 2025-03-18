@@ -12,15 +12,15 @@ class Cafe
 {
 public:
 	Cafe() {};
-	Cafe(int capacity, int cooksCount, double cooksSalary, Menu *menu);
+	Cafe(int capacity, int cooksCount, double cooksSalary,  Menu* const menu);
 	~Cafe();
 	void distributeOrders(double time);
 	void serveClients(double time);
-	void placeNewClient(Client* client);
+	void placeNewClient(Client* const client);
 	void restartCafe();
 	Result getResult();
-	inline int getBusyCooks() { return m_busyCooks; }
-	inline Menu* const getMenu() { return m_menu; };
+	inline int getBusyCooks() const { return m_busyCooks; }
+	inline  Menu* const getMenu() { return m_menu; };
 	inline int getFreeSpaces() const { return m_capacity - m_clients->size(); };
 	inline int getTotalAmountOfOrders() { return m_orders->size(); };
 

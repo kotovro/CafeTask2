@@ -114,15 +114,99 @@ namespace CafeUnitTests
 
 			Menu* menu = new Menu();
 			menu->getBreakfastMenu()->push_back(dish);
-
-			Cafe* cafe = new Cafe(1, 0, 1, menu);
+			
+			Cafe* cafe = new Cafe(1, 1, 1, menu);
 			LowTolerantClient* client = new LowTolerantClient(0, order);
 			cafe->placeNewClient(client);
+			cafe->distributeOrders(39);
 			cafe->serveClients(40); 
 
 			Assert::AreEqual(1, cafe->getFreeSpaces());
 			Assert::AreEqual(0, cafe->getBusyCooks());
+			Assert::AreEqual(11.0, cafe->getResult().loss);
 			
+			delete cafe;
+			delete menu;
+			delete dish;
+			delete ingredientForTests;
+		}
+
+		TEST_METHOD(ClientsServe)
+		{
+			Ingredient* ingredientForTests = new Ingredient(10);
+			Dish* dish = new Dish();
+			dish->getIngeredients()->push_back(ingredientForTests);
+			dish->setCookingTime(3);
+			std::shared_ptr<Order> lowTolerantOrder(new Order);
+			lowTolerantOrder->getDishes()->push_back(dish);
+		
+			std::shared_ptr<Order> tolerantOrder(new Order);
+			tolerantOrder->getDishes()->push_back(dish);
+
+			std::shared_ptr<Order> superTolerantOrder(new Order);
+			superTolerantOrder->getDishes()->push_back(dish);
+
+			Menu* menu = new Menu();
+			menu->getBreakfastMenu()->push_back(dish);
+
+			Cafe* cafe = new Cafe(3, 1, 1, menu);
+			LowTolerantClient* lowTolerantClient = new LowTolerantClient(0, lowTolerantOrder);
+			TolerantClient* tolerantClient = new TolerantClient(0, tolerantOrder);
+			SuperTolerantClient* superTolerantClient = new SuperTolerantClient(0, superTolerantOrder);
+
+			cafe->placeNewClient(lowTolerantClient);
+			cafe->placeNewClient(tolerantClient);
+			cafe->placeNewClient(superTolerantClient);
+
+			cafe->distributeOrders(0);
+
+			cafe->serveClients(4);
+
+			Assert::AreEqual(1, cafe->getFreeSpaces());
+			Assert::AreEqual(0, cafe->getBusyCooks());
+
+			delete cafe;
+			delete menu;
+			delete dish;
+			delete ingredientForTests;
+		}
+
+		TEST_METHOD(ClientsServeWithDistribution)
+		{
+			Ingredient* ingredientForTests = new Ingredient(10);
+			Dish* dish = new Dish();
+			dish->getIngeredients()->push_back(ingredientForTests);
+			dish->setCookingTime(3);
+			std::shared_ptr<Order> lowTolerantOrder(new Order);
+			lowTolerantOrder->getDishes()->push_back(dish);
+
+			std::shared_ptr<Order> tolerantOrder(new Order);
+			tolerantOrder->getDishes()->push_back(dish);
+
+			std::shared_ptr<Order> superTolerantOrder(new Order);
+			superTolerantOrder->getDishes()->push_back(dish);
+
+			Menu* menu = new Menu();
+			menu->getBreakfastMenu()->push_back(dish);
+
+			Cafe* cafe = new Cafe(3, 1, 1, menu);
+			LowTolerantClient* lowTolerantClient = new LowTolerantClient(0, lowTolerantOrder);
+			TolerantClient* tolerantClient = new TolerantClient(0, tolerantOrder);
+			SuperTolerantClient* superTolerantClient = new SuperTolerantClient(0, superTolerantOrder);
+
+			cafe->placeNewClient(lowTolerantClient);
+			cafe->placeNewClient(tolerantClient);
+			cafe->placeNewClient(superTolerantClient);
+
+			cafe->distributeOrders(0);
+
+			cafe->serveClients(4);
+
+			cafe->distributeOrders(4);
+
+			Assert::AreEqual(1, cafe->getFreeSpaces());
+			Assert::AreEqual(1, cafe->getBusyCooks());
+
 			delete cafe;
 			delete menu;
 			delete dish;

@@ -6,7 +6,7 @@ class Simulation
 {
 public:
 	Simulation();
-	Simulation(int cafeCapacity, int cooksCount, double cooksSalary,  double workingTime, double timeInterval, Menu* menu);
+	Simulation(int cafeCapacity, int cooksCount, double cooksSalary,  double workingTime, double timeInterval, Menu* const menu);
 	~Simulation();
 	Result simulateDay();
 

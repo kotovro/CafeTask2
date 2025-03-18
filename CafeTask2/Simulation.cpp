@@ -19,7 +19,7 @@ Result Simulation::simulateDay()
 	for (double time = 0; time < m_workingHours; time += m_timeInterval)
 	{
 		m_cafe->serveClients(time);
-		int numberNewClients = rand() % 11;/// generate some unmber fom 0 to getFreeSpaces;
+		int numberNewClients = rand() % 11;
 		while (numberNewClients-- > 0 && m_cafe->getFreeSpaces() > 0)
 		{
 			m_cafe->placeNewClient(ClientFactory::getNewClient(time, m_cafe->getMenu()));

@@ -13,6 +13,6 @@ public:
 		int dishIndex = rand() % menuPart->size();
 		order->getDishes()->push_back(menuPart->at(dishIndex));
 	}
-	static Client* getNewClient(double time, Menu* const menu);
+	static Client* getNewClient(double time, Menu* const  menu);
 };
 

@@ -9,7 +9,7 @@ class Menu
 public:
 	Menu() {};
 
-	inline std::vector<Dish*>* getBreakfastMenu() { return m_breakfast;	}
+	inline std::vector<Dish*>* getBreakfastMenu() { return m_breakfast;	} 
 
 	inline std::vector<Dish*>* getLunchMenu() {	return m_lunch; }
 	
@@ -23,13 +23,11 @@ public:
 	~Menu()
 	{
 		
-		//std::cout << "Menu is destroyed!" << std::endl;
 		delete m_breakfast;
 		delete m_lunch;
 		delete m_dinner;
 		delete m_drinks;
 		delete m_cocktails;
-		//std::cout << "Submenus are destroyed!" << std::endl;
 	}
 
 private:

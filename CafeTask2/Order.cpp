@@ -15,7 +15,7 @@ double Order::getCost()
 	return totalCost;
 }
 
-double Order::getCookingTime()
+double Order::getCookingTime() const
 {
 	double totalCookingTime = 0;
 	for (auto dish : *m_dishes)
@@ -30,7 +30,7 @@ double Order::getCookingStartTime()
 	return m_cookingStartTime;
 }
 
-bool Order::isReady(double time)
+bool Order::isReady(double time) const
 {
 	return (m_cookingStartTime < 0 ) ? false : time >= m_cookingStartTime + getCookingTime();
 }

@@ -26,6 +26,8 @@ void Cafe::serveClients(double time)
 
 	for (auto servedClient = clientsToLeave; servedClient != m_clients->end(); ++servedClient)
 	{
+		/*if (m_busyCooks < 0)
+			break;*/
 		//std::shared_ptr<Order> order = servedClient->getOrder();
 		m_result.income += (*servedClient)->getOrder()->getCost() + (*servedClient)->getOrder()->getCookingTime() * m_cookSalary;
 		//std::cout << "Cook got:" << (*servedClient)->getOrder()->getCookingTime() * m_cookSalary << std::endl;
@@ -94,7 +96,7 @@ void Cafe::distributeOrders(double time)
 	}
 }
 
-void Cafe::placeNewClient(Client* client)
+void Cafe::placeNewClient(Client* const client)
 {
 	m_clients->push_back(client);
 	m_orders->push(client->getOrder());

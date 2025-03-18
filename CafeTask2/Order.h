@@ -11,10 +11,10 @@ public:
 		//m_dishes->clear();
 	};
 	void startCooking(double time);
-	double getCookingTime();
+	double getCookingTime() const;
 	inline std::vector<Dish*>* const getDishes() { return m_dishes; };
 	double getCookingStartTime();
-	bool isReady(double time);
+	bool isReady(double time) const;
 	double getCost();
 
 	bool isClientLeft = false;
